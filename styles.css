@@ -17,6 +17,14 @@ h1{
   vertical-align: middle;
 }
 
+.keyboard{
+  text-align: center;
+}
+
+.keyboard .letter{
+  margin-bottom: .5em;
+}
+
 .keyboard, .message-section{
   display: block;
   width: 90%;

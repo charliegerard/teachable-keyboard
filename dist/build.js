@@ -46,6 +46,8 @@ var letterIndex = 0;
 var startPrediction = false;
 var training = true;
 
+var trainingSection = document.getElementsByClassName('training-section')[0];
+
 var Main = function () {
   function Main() {
     var _this = this;
@@ -62,23 +64,29 @@ var Main = function () {
 
     // Create video element that will contain the webcam image
     this.video = document.createElement('video');
+    this.video.classList.add('video');
     this.video.setAttribute('autoplay', '');
     this.video.setAttribute('playsinline', '');
 
     // Add video element to DOM
-    document.body.appendChild(this.video);
+    trainingSection.appendChild(this.video);
 
     // Create training buttons and info texts
 
     var _loop = function _loop(i) {
-      var div = document.createElement('div');
-      document.body.appendChild(div);
-      div.style.marginBottom = '10px';
+      var buttonBlock = document.createElement('div');
+      buttonBlock.classList.add('button-block');
 
       // Create training button
       var button = document.createElement('button');
       button.innerText = classes[i];
-      div.appendChild(button);
+      buttonBlock.appendChild(button);
+      trainingSection.appendChild(buttonBlock);
+
+      var div = document.createElement('div');
+      div.classList.add('examples-text');
+      buttonBlock.appendChild(div);
+      div.style.marginBottom = '10px';
 
       // Listen for mouse events when clicking the button
       button.addEventListener('mousedown', function () {
@@ -88,7 +96,7 @@ var Main = function () {
         return _this.training = -1;
       });
 
-      // Create info text
+      // // Create info text
       var infoText = document.createElement('span');
       infoText.innerText = " No examples added";
       div.appendChild(infoText);
