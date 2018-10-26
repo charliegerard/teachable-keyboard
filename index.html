@@ -10,19 +10,24 @@
 <body>
   <h1>Head-controlled keyboard</h1>
 
-  <section class="keyboard">
-    <div class="letter selected">A</div>
-    <div class="letter">B</div>
-    <div class="letter">C</div>
-    <div class="letter">D</div>
-    <div class="letter">E</div>
-  </section>
-
-  <section class="message-section">
-    <input type="text" class="message-input">
-  </section>
-
   <button class="start">Start Prediction</button>
+
+  <section class="interaction-block">
+    <section class="message-section">
+        <input type="text" class="message-input">
+    </section>
+
+    <section class="keyboard">
+      <div class="letter selected">A</div>
+      <div class="letter">B</div>
+      <div class="letter">C</div>
+      <div class="letter">D</div>
+      <div class="letter">E</div>
+    </section>
+  </section>
+
+  <section class="training-section">
+  </section>
 
   <script src="dist/build.js"></script>
 </body>

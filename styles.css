@@ -1,18 +1,78 @@
-.keyboard{
+body{
+  font-family: 'Helvetica';
+}
+
+h1{
+  text-align: center;
+  margin-bottom: 2em;
+}
+
+.start{
   display: block;
+}
+
+.interaction-block{
   width: 60%;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.keyboard, .message-section{
+  display: block;
+  width: 90%;
   margin: 0 auto;
 }
 
 .keyboard div{
   display: inline-block;
-  width: 2em;
-  height: 2em;
+  width: 3em;
+  height: 3em;
   background-color: lightgrey;
   text-align: center;
   font-size: 14px;
+  border-radius: .2em;
 }
 
 .keyboard div.selected{
   font-size: 20px;
+}
+
+video{
+  display: block;
+  margin: 0 auto;
+}
+
+.button-block{
+  width: fit-content;
+  display: block;
+  margin: 0 auto;
+}
+
+.button-block button{
+  display: inline-block;
+  margin-right: 1em;
+  border: none;
+  background-color: lightgrey;
+  padding: 1em 2em;
+  border-radius: .2em;
+  margin-bottom: 1em;
+}
+
+.button-block .examples-text{
+  display: inline-block;
+}
+
+.training-section{
+  width: 35%;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.message-input{
+  width: 100%;
+  display: block;
+  margin: 0 auto;
+  padding: 1em;
+  min-height: 60px;
+  margin-bottom: 2em;
 }
