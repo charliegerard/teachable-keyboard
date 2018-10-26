@@ -18,11 +18,17 @@ import * as tf from '@tensorflow/tfjs';
 import * as knnClassifier from '@tensorflow-models/knn-classifier';
 
 // Number of classes to classify
-const NUM_CLASSES = 3;
-// Webcam Image size. Must be 227. 
+const NUM_CLASSES = 4;
+// Webcam Image size. Must be 227.
 const IMAGE_SIZE = 227;
 // K value for KNN
 const TOPK = 10;
+
+const classes = ['Right', 'Left', 'Down', 'Neutral'];
+let letterIndex = 0;
+
+let startPrediction = false;
+let training = true;
 
 
 class Main {
@@ -43,7 +49,7 @@ class Main {
     // Add video element to DOM
     document.body.appendChild(this.video);
 
-    // Create training buttons and info texts    
+    // Create training buttons and info texts
     for (let i = 0; i < NUM_CLASSES; i++) {
       const div = document.createElement('div');
       document.body.appendChild(div);
@@ -51,7 +57,7 @@ class Main {
 
       // Create training button
       const button = document.createElement('button')
-      button.innerText = "Train " + i;
+      button.innerText = classes[i];
       div.appendChild(button);
 
       // Listen for mouse events when clicking the button
@@ -98,6 +104,29 @@ class Main {
     cancelAnimationFrame(this.timer);
   }
 
+  controlKeyboard(command) {
+    const keys = document.getElementsByClassName('letter');
+
+    if(command === "Right"){
+      if(this.timer % 25 === 0 && letterIndex < keys.length){
+        letterIndex++;
+        document.getElementsByClassName("selected")[0].classList.remove("selected");
+        document.getElementsByClassName("letter")[letterIndex].classList.add("selected")
+      }
+    } else if(command === "Left"){
+      if(this.timer % 25 === 0 && letterIndex >= 0){
+        letterIndex--;
+        document.getElementsByClassName("selected")[0].classList.remove("selected");
+        document.getElementsByClassName("letter")[letterIndex].classList.add("selected")
+      }
+    } else if(command === "Down"){
+      if(this.timer % 25 === 0){
+        document.getElementsByClassName('message-input')[0].value += document.getElementsByClassName("selected")[0].textContent;
+      }
+    }
+
+  }
+
   async animate() {
     if (this.videoPlaying) {
       // Get image data from video element
@@ -116,30 +145,50 @@ class Main {
       }
 
       const numClasses = this.knn.getNumClasses();
-      if (numClasses > 0) {
 
-        // If classes have been added run predict
-        logits = infer();
-        const res = await this.knn.predictClass(logits, TOPK);
+      //start prediction
+      if(startPrediction){
+        training = false;
+        if (numClasses > 0) {
 
-        for (let i = 0; i < NUM_CLASSES; i++) {
+          // If classes have been added run predict
+          logits = infer();
+          const res = await this.knn.predictClass(logits, TOPK);
 
-          // The number of examples for each class
-          const exampleCount = this.knn.getClassExampleCount();
+          for (let i = 0; i < NUM_CLASSES; i++) {
 
-          // Make the predicted class bold
-          if (res.classIndex == i) {
-            this.infoTexts[i].style.fontWeight = 'bold';
-          } else {
-            this.infoTexts[i].style.fontWeight = 'normal';
-          }
+            // The number of examples for each class
+            const exampleCount = this.knn.getClassExampleCount();
 
-          // Update info text
-          if (exampleCount[i] > 0) {
-            this.infoTexts[i].innerText = ` ${exampleCount[i]} examples - ${res.confidences[i] * 100}%`
+            // Make the predicted class bold
+            if (res.classIndex == i) {
+              this.infoTexts[i].style.fontWeight = 'bold';
+              this.controlKeyboard(classes[res.classIndex])
+            } else {
+              this.infoTexts[i].style.fontWeight = 'normal';
+            }
+
+            // Update info text
+            if (exampleCount[i] > 0) {
+              this.infoTexts[i].innerText = ` ${exampleCount[i]} examples - ${res.confidences[i] * 100}%`
+            }
           }
         }
       }
+
+
+      if(training){
+        // The number of examples for each class
+        const exampleCount = this.knn.getClassExampleCount();
+
+        for (let i = 0; i < NUM_CLASSES; i++) {
+          // Update info text
+          if (exampleCount[i] > 0) {
+            this.infoTexts[i].innerText = ` ${exampleCount[i]} examples`
+          }
+        }
+      }
+
 
       // Dispose image when done
       image.dispose();
@@ -150,5 +199,10 @@ class Main {
     this.timer = requestAnimationFrame(this.animate.bind(this));
   }
 }
+
+document.getElementsByClassName('start')[0].addEventListener('click', function(){
+
+  startPrediction = true
+})
 
 window.addEventListener('load', () => new Main());

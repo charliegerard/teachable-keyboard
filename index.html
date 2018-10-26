@@ -4,10 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Teachable Machine Boilerplate</title>
-
-    <script src="dist/build.js"></script>
+    <title>Head-controlled keyboard with Tensorflow.js</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <h1>Head-controlled keyboard</h1>
+
+  <section class="keyboard">
+    <div class="letter selected">A</div>
+    <div class="letter">B</div>
+    <div class="letter">C</div>
+    <div class="letter">D</div>
+    <div class="letter">E</div>
+  </section>
+
+  <section class="message-section">
+    <input type="text" class="message-input">
+  </section>
+
+  <button class="start">Start Prediction</button>
+
+  <script src="dist/build.js"></script>
 </body>
 </html>
