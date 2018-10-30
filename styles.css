@@ -1,10 +1,15 @@
 body{
   font-family: 'Helvetica';
+  background-color: #FFD401;
 }
 
 h1{
   text-align: center;
   margin-bottom: 2em;
+  color: white;
+  font-family: "Russo One", sans-serif;
+  text-transform: uppercase;
+  text-shadow: 1px 1px 2px black;
 }
 
 .start{
@@ -12,17 +17,25 @@ h1{
 }
 
 .interaction-block{
-  width: 60%;
+  width: 50%;
   display: inline-block;
   vertical-align: middle;
 }
 
 .keyboard{
   text-align: center;
+  border: 3px solid black;
+  border-radius: 4px;
+  padding: 1em;
+  background: #352E4D;
 }
 
 .keyboard .letter{
   margin-bottom: .5em;
+}
+
+.letter p{
+  font-size: 16px;
 }
 
 .keyboard, .message-section{
@@ -35,14 +48,16 @@ h1{
   display: inline-block;
   width: 3em;
   height: 3em;
-  background-color: lightgrey;
+  background-color: white;
   text-align: center;
   font-size: 14px;
   border-radius: .2em;
+  /* border: 3px solid #D91668; */
 }
 
 .keyboard div.selected{
-  font-size: 20px;
+  background: rgb(136, 118, 199);
+  color: white;
 }
 
 video{

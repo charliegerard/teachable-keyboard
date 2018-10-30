@@ -4,13 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Head-controlled keyboard with Tensorflow.js</title>
+    <title>Teachable keyboard with Tensorflow.js</title>
+    <link href="https://fonts.googleapis.com/css?family=Russo+One" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1>Head-controlled keyboard</h1>
-
+  <h1>Teachable keyboard</h1>
   <button class="start">Start Prediction</button>
+
+  <section class="training-section">
+  </section>
 
   <section class="interaction-block">
     <section class="message-section">
@@ -18,36 +21,33 @@
     </section>
 
     <section class="keyboard">
-      <div class="letter selected">Q</div>
-      <div class="letter">W</div>
-      <div class="letter">E</div>
-      <div class="letter">R</div>
-      <div class="letter">T</div>
-      <div class="letter">Y</div>
-      <div class="letter">U</div>
-      <div class="letter">I</div>
-      <div class="letter">O</div>
-      <div class="letter">P</div>
-      <div class="letter">A</div>
-      <div class="letter">S</div>
-      <div class="letter">D</div>
-      <div class="letter">F</div>
-      <div class="letter">G</div>
-      <div class="letter">H</div>
-      <div class="letter">J</div>
-      <div class="letter">K</div>
-      <div class="letter">L</div>
-      <div class="letter">Z</div>
-      <div class="letter">X</div>
-      <div class="letter">C</div>
-      <div class="letter">V</div>
-      <div class="letter">B</div>
-      <div class="letter">N</div>
-      <div class="letter">M</div>
+      <div class="letter selected"><p>Q</p></div>
+      <div class="letter"><p>W</p></div>
+      <div class="letter"><p>E</p></div>
+      <div class="letter"><p>R</p></div>
+      <div class="letter"><p>T</p></div>
+      <div class="letter"><p>Y</p></div>
+      <div class="letter"><p>U</p></div>
+      <div class="letter"><p>I</p></div>
+      <div class="letter"><p>O</p></div>
+      <div class="letter"><p>P</p></div>
+      <div class="letter"><p>A</p></div>
+      <div class="letter"><p>S</p></div>
+      <div class="letter"><p>D</p></div>
+      <div class="letter"><p>F</p></div>
+      <div class="letter"><p>G</p></div>
+      <div class="letter"><p>H</p></div>
+      <div class="letter"><p>J</p></div>
+      <div class="letter"><p>K</p></div>
+      <div class="letter"><p>L</p></div>
+      <div class="letter"><p>Z</p></div>
+      <div class="letter"><p>X</p></div>
+      <div class="letter"><p>C</p></div>
+      <div class="letter"><p>V</p></div>
+      <div class="letter"><p>B</p></div>
+      <div class="letter"><p>N</p></div>
+      <div class="letter"><p>M</p></div>
     </section>
-  </section>
-
-  <section class="training-section">
   </section>
 
   <script src="dist/build.js"></script>
