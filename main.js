@@ -217,7 +217,7 @@ class Main {
 }
 
 
-if(window.location.pathname === '/training.html'){
+if(window.location.pathname === "/teachable-keyboard/training.html"){
   window.addEventListener('load', () => new Main());
   document.getElementsByClassName('test-predictions')[0].addEventListener('click', function(){
     testPrediction = true;
