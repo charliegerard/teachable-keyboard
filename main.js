@@ -224,6 +224,7 @@ if(window.location.pathname === '/training.html'){
   })
 
   document.getElementsByClassName('start-prediction')[0].addEventListener('click', function(){
+    if (!testPrediction) testPrediction = true;
     startPrediction = true;
 
     if(startPrediction){

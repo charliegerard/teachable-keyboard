@@ -29,6 +29,8 @@ var _knnClassifier = require('@tensorflow-models/knn-classifier');
 
 var knnClassifier = _interopRequireWildcard(_knnClassifier);
 
+var _test_util = require('@tensorflow/tfjs-core/dist/test_util');
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -43,10 +45,13 @@ var TOPK = 10;
 var classes = ['Right', 'Left', 'Down', 'Neutral'];
 var letterIndex = 0;
 
+var testPrediction = false;
 var startPrediction = false;
 var training = true;
 
 var trainingSection = document.getElementsByClassName('training-section')[0];
+var buttonsSection = document.createElement('section');
+buttonsSection.classList.add('buttons-section');
 
 var Main = function () {
   function Main() {
@@ -81,7 +86,7 @@ var Main = function () {
       var button = document.createElement('button');
       button.innerText = classes[i];
       buttonBlock.appendChild(button);
-      trainingSection.appendChild(buttonBlock);
+      buttonsSection.appendChild(buttonBlock);
 
       var div = document.createElement('div');
       div.classList.add('examples-text');
@@ -106,17 +111,21 @@ var Main = function () {
     for (var i = 0; i < NUM_CLASSES; i++) {
       _loop(i);
     }
+    trainingSection.appendChild(buttonsSection);
 
     // Setup webcam
-    // navigator.mediaDevices.getUserMedia({ video: true, audio: false })
-    //   .then((stream) => {
-    //     this.video.srcObject = stream;
-    //     this.video.width = IMAGE_SIZE;
-    //     this.video.height = IMAGE_SIZE;
+    navigator.mediaDevices.getUserMedia({ video: true, audio: false }).then(function (stream) {
+      _this.video.srcObject = stream;
+      _this.video.width = IMAGE_SIZE;
+      _this.video.height = IMAGE_SIZE;
 
-    //     this.video.addEventListener('playing', () => this.videoPlaying = true);
-    //     this.video.addEventListener('paused', () => this.videoPlaying = false);
-    //   })
+      _this.video.addEventListener('playing', function () {
+        return _this.videoPlaying = true;
+      });
+      _this.video.addEventListener('paused', function () {
+        return _this.videoPlaying = false;
+      });
+    });
   }
 
   _createClass(Main, [{
@@ -220,7 +229,7 @@ var Main = function () {
 
               //start prediction
 
-              if (!startPrediction) {
+              if (!testPrediction) {
                 _context2.next = 14;
                 break;
               }
@@ -250,7 +259,9 @@ var Main = function () {
 
                 if (res.classIndex == i) {
                   this.infoTexts[i].style.fontWeight = 'bold';
-                  this.controlKeyboard(classes[res.classIndex]);
+                  if (startPrediction) {
+                    this.controlKeyboard(classes[res.classIndex]);
+                  }
                 } else {
                   this.infoTexts[i].style.fontWeight = 'normal';
                 }
@@ -297,16 +308,26 @@ var Main = function () {
   return Main;
 }();
 
-document.getElementsByClassName('start')[0].addEventListener('click', function () {
+if (window.location.pathname === '/training.html') {
+  window.addEventListener('load', function () {
+    return new Main();
+  });
+  document.getElementsByClassName('test-predictions')[0].addEventListener('click', function () {
+    testPrediction = true;
+  });
 
-  startPrediction = true;
-});
+  document.getElementsByClassName('start-prediction')[0].addEventListener('click', function () {
+    startPrediction = true;
 
-window.addEventListener('load', function () {
-  return new Main();
-});
+    if (startPrediction) {
+      document.getElementsByClassName('training-section')[0].classList.add('no-display');
+      document.getElementsByClassName('predictions-buttons')[0].classList.add('no-display');
+      document.getElementsByClassName('interaction-block')[0].classList.add('display');
+    }
+  });
+}
 
-},{"@babel/polyfill":2,"@tensorflow-models/knn-classifier":10,"@tensorflow-models/mobilenet":13,"@tensorflow/tfjs":255}],2:[function(require,module,exports){
+},{"@babel/polyfill":2,"@tensorflow-models/knn-classifier":10,"@tensorflow-models/mobilenet":13,"@tensorflow/tfjs":255,"@tensorflow/tfjs-core/dist/test_util":197}],2:[function(require,module,exports){
 (function (global){
 "use strict";
 
