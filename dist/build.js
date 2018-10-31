@@ -108,18 +108,15 @@ var Main = function () {
     }
 
     // Setup webcam
-    navigator.mediaDevices.getUserMedia({ video: true, audio: false }).then(function (stream) {
-      _this.video.srcObject = stream;
-      _this.video.width = IMAGE_SIZE;
-      _this.video.height = IMAGE_SIZE;
+    // navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+    //   .then((stream) => {
+    //     this.video.srcObject = stream;
+    //     this.video.width = IMAGE_SIZE;
+    //     this.video.height = IMAGE_SIZE;
 
-      _this.video.addEventListener('playing', function () {
-        return _this.videoPlaying = true;
-      });
-      _this.video.addEventListener('paused', function () {
-        return _this.videoPlaying = false;
-      });
-    });
+    //     this.video.addEventListener('playing', () => this.videoPlaying = true);
+    //     this.video.addEventListener('paused', () => this.videoPlaying = false);
+    //   })
   }
 
   _createClass(Main, [{

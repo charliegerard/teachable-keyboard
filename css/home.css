@@ -1,0 +1,55 @@
+body{
+  font-family: 'Helvetica';
+  background-color: #FFD401;
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  align-content: center;
+  height: 100%;
+  position: absolute;
+  width: 100%;
+}
+
+section{
+  display: block;
+}
+
+h1{
+  text-align: center;
+  color: white;
+  font-family: "Russo One", sans-serif;
+  text-transform: uppercase;
+  text-shadow: 1px 1px 2px black;
+  font-size: 4em;
+  display: block;
+  margin-bottom: 0;
+}
+
+p{
+  text-align: center;
+  /* color: white; */
+  color: #352E4D;
+  font-weight: 400;
+  font-size: 1.5em;
+  font-family: "Open Sans";
+}
+
+.start{
+  display: block;
+  margin: 0 auto;
+  padding: 1em;
+  background: #D91668;
+  color: white;
+  border: 3px solid black;
+  font-size: 1em;
+  margin-top: 2em;
+  width: fit-content;
+  text-decoration: none;
+  /* font-weight: 200; */
+  font-family: "Russo One", sans-serif;
+  border-radius: 4px;
+}
+
+
+

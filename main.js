@@ -16,6 +16,7 @@ import "@babel/polyfill";
 import * as mobilenetModule from '@tensorflow-models/mobilenet';
 import * as tf from '@tensorflow/tfjs';
 import * as knnClassifier from '@tensorflow-models/knn-classifier';
+import { expectPromiseToFail } from "@tensorflow/tfjs-core/dist/test_util";
 
 // Number of classes to classify
 const NUM_CLASSES = 4;
@@ -27,10 +28,13 @@ const TOPK = 10;
 const classes = ['Right', 'Left', 'Down', 'Neutral'];
 let letterIndex = 0;
 
+let testPrediction = false;
 let startPrediction = false;
 let training = true;
 
 const trainingSection = document.getElementsByClassName('training-section')[0];
+const buttonsSection = document.createElement('section');
+buttonsSection.classList.add('buttons-section');
 
 class Main {
   constructor() {
@@ -61,7 +65,7 @@ class Main {
       const button = document.createElement('button');
       button.innerText = classes[i];
       buttonBlock.appendChild(button);
-      trainingSection.appendChild(buttonBlock);
+      buttonsSection.appendChild(buttonBlock);
 
       const div = document.createElement('div');
       div.classList.add('examples-text');
@@ -78,18 +82,19 @@ class Main {
       div.appendChild(infoText);
       this.infoTexts.push(infoText);
     }
+    trainingSection.appendChild(buttonsSection);
 
 
     // Setup webcam
-    // navigator.mediaDevices.getUserMedia({ video: true, audio: false })
-    //   .then((stream) => {
-    //     this.video.srcObject = stream;
-    //     this.video.width = IMAGE_SIZE;
-    //     this.video.height = IMAGE_SIZE;
+    navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+      .then((stream) => {
+        this.video.srcObject = stream;
+        this.video.width = IMAGE_SIZE;
+        this.video.height = IMAGE_SIZE;
 
-    //     this.video.addEventListener('playing', () => this.videoPlaying = true);
-    //     this.video.addEventListener('paused', () => this.videoPlaying = false);
-    //   })
+        this.video.addEventListener('playing', () => this.videoPlaying = true);
+        this.video.addEventListener('paused', () => this.videoPlaying = false);
+      })
   }
 
   async bindPage() {
@@ -155,7 +160,7 @@ class Main {
       const numClasses = this.knn.getNumClasses();
 
       //start prediction
-      if(startPrediction){
+      if(testPrediction){
         training = false;
         if (numClasses > 0) {
 
@@ -171,7 +176,10 @@ class Main {
             // Make the predicted class bold
             if (res.classIndex == i) {
               this.infoTexts[i].style.fontWeight = 'bold';
-              this.controlKeyboard(classes[res.classIndex])
+              if(startPrediction){
+                this.controlKeyboard(classes[res.classIndex])
+              }
+
             } else {
               this.infoTexts[i].style.fontWeight = 'normal';
             }
@@ -208,9 +216,21 @@ class Main {
   }
 }
 
-document.getElementsByClassName('start')[0].addEventListener('click', function(){
 
-  startPrediction = true
-})
+if(window.location.pathname === '/training.html'){
+  window.addEventListener('load', () => new Main());
+  document.getElementsByClassName('test-predictions')[0].addEventListener('click', function(){
+    testPrediction = true;
+  })
 
-window.addEventListener('load', () => new Main());
+  document.getElementsByClassName('start-prediction')[0].addEventListener('click', function(){
+    startPrediction = true;
+
+    if(startPrediction){
+      document.getElementsByClassName('training-section')[0].classList.add('no-display');
+      document.getElementsByClassName('predictions-buttons')[0].classList.add('no-display');
+      document.getElementsByClassName('interaction-block')[0].classList.add('display');
+    }
+  })
+}
+
