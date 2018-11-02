@@ -1,6 +1,6 @@
 # Teachable keyboard using Tensorflow.js
 
-This prototype is using the [Teachable Machine Boilerplate](https://github.com/googlecreativelab/teachable-machine-boilerplate).
+This project is a very quick prototype using the [Teachable Machine Boilerplate](https://github.com/googlecreativelab/teachable-machine-boilerplate).
 
 It uses [tensorflow.js](https://github.com/tensorflow/tfjs-models) with a KNN classifier that is trained live in the browser using images from the webcam.
 
