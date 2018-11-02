@@ -166,3 +166,24 @@ video{
 .display{
   display: block;
 }
+
+
+@media (max-width: 375px){
+  .interaction-block{
+    width: 95%;
+  }
+
+  .message-section{
+    margin-bottom: 2em;
+    margin-top: 0;
+  }
+
+  .keyboard div{
+    width: 3em;
+    height: 3em;
+  }
+
+  .letter p{
+    font-size: 1.2em;
+  }
+}

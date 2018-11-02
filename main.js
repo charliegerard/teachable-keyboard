@@ -74,7 +74,9 @@ class Main {
 
       // Listen for mouse events when clicking the button
       button.addEventListener('mousedown', () => this.training = i);
+      button.addEventListener('touchstart', () => this.training = i);
       button.addEventListener('mouseup', () => this.training = -1);
+      button.addEventListener('touchend', () => this.training = -1);
 
       // // Create info text
       const infoText = document.createElement('span')
