@@ -173,7 +173,7 @@ var Main = function () {
       var keys = document.getElementsByClassName('letter');
 
       if (command === "Right") {
-        if (this.timer % 25 === 0 && letterIndex < keys.length) {
+        if (this.timer % 15 === 0 && letterIndex < keys.length) {
           if (letterIndex !== keys.length - 1) {
             letterIndex++;
           }
@@ -181,7 +181,7 @@ var Main = function () {
           document.getElementsByClassName("letter")[letterIndex].classList.add("selected");
         }
       } else if (command === "Left") {
-        if (this.timer % 25 === 0 && letterIndex >= 0) {
+        if (this.timer % 15 === 0 && letterIndex >= 0) {
           if (letterIndex !== 0) {
             letterIndex--;
           }
@@ -189,7 +189,7 @@ var Main = function () {
           document.getElementsByClassName("letter")[letterIndex].classList.add("selected");
         }
       } else if (command === "Down") {
-        if (this.timer % 25 === 0) {
+        if (this.timer % 15 === 0) {
           var selected = document.getElementsByClassName("selected")[0].textContent;
 
           if (selected === "Space") {

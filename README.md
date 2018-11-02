@@ -1,6 +1,6 @@
-# Head-controlled keyboard using Tensorflow.js
+# Teachable keyboard using Tensorflow.js
 
-This prototype is using the Teachable Machine Boilerplate.
+This prototype is using the [Teachable Machine Boilerplate](https://github.com/googlecreativelab/teachable-machine-boilerplate).
 
 It uses [tensorflow.js](https://github.com/tensorflow/tfjs-models) with a KNN classifier that is trained live in the browser using images from the webcam.
 
@@ -28,9 +28,3 @@ Open a new tab in your browser and enter [`localhost:9966`](http://localhost:996
 If you haven't already, allow permission to your webcam, and start adding examples by clicking on the buttons.
 
 To start the predictions, click on the "Start prediction" button.
-
-
-## To do:
-
-- [ ] Redesign
-- [ ] Try to export model with new training images from webcam to reuse on another site without training?
