@@ -122,19 +122,33 @@ class Main {
 
     if(command === "Right"){
       if(this.timer % 25 === 0 && letterIndex < keys.length){
-        letterIndex++;
+        if(letterIndex !== keys.length - 1){
+          letterIndex++;
+        }
         document.getElementsByClassName("selected")[0].classList.remove("selected");
         document.getElementsByClassName("letter")[letterIndex].classList.add("selected")
       }
     } else if(command === "Left"){
       if(this.timer % 25 === 0 && letterIndex >= 0){
-        letterIndex--;
+        if(letterIndex !== 0){
+          letterIndex--;
+        }
         document.getElementsByClassName("selected")[0].classList.remove("selected");
-        document.getElementsByClassName("letter")[letterIndex].classList.add("selected")
+        document.getElementsByClassName("letter")[letterIndex].classList.add("selected");
       }
     } else if(command === "Down"){
       if(this.timer % 25 === 0){
-        document.getElementsByClassName('message-input')[0].value += document.getElementsByClassName("selected")[0].textContent;
+        const selected = document.getElementsByClassName("selected")[0].textContent;
+
+        if(selected === "Space"){
+          document.getElementsByClassName('message-input')[0].value += " ";
+        } else if(selected === "Delete"){
+          if(document.getElementsByClassName('message-input')[0].value.length > 0){
+            document.getElementsByClassName('message-input')[0].value = document.getElementsByClassName('message-input')[0].value.slice(0, -1);
+          }
+        } else {
+          document.getElementsByClassName('message-input')[0].value += selected;
+        }
       }
     }
 
@@ -217,7 +231,7 @@ class Main {
 }
 
 
-if(window.location.pathname === "/teachable-keyboard/training.html"){
+if(window.location.pathname === "/teachable-keyboard/training.html" || window.location.pathname === "/training.html"){
   window.addEventListener('load', () => new Main());
   document.getElementsByClassName('test-predictions')[0].addEventListener('click', function(){
     testPrediction = true;

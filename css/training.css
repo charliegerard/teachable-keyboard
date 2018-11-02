@@ -103,6 +103,15 @@ video{
   margin-bottom: .5em;
 }
 
+.keyboard .space{
+  padding: 0 2em;
+  padding: 0 2em;
+  justify-content: center;
+  align-items: center;
+  display: inline-flex;
+  margin: 0 auto;
+}
+
 .letter p{
   font-size: 20px;
 }
