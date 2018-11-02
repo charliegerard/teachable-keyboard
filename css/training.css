@@ -168,7 +168,7 @@ video{
 }
 
 
-@media (max-width: 375px){
+@media (max-width: 450px){
   .interaction-block{
     width: 95%;
   }

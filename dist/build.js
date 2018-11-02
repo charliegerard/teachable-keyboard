@@ -97,7 +97,13 @@ var Main = function () {
       button.addEventListener('mousedown', function () {
         return _this.training = i;
       });
+      button.addEventListener('touchstart', function () {
+        return _this.training = i;
+      });
       button.addEventListener('mouseup', function () {
+        return _this.training = -1;
+      });
+      button.addEventListener('touchend', function () {
         return _this.training = -1;
       });
 
